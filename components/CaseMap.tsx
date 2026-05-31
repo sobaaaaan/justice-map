@@ -234,6 +234,7 @@ export default function CaseMap() {
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
   const [cases, setCases] = useState<CasePoint[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const loadData = useCallback(async (filter: CategoryFilter) => {
     setLoading(true);
@@ -245,6 +246,14 @@ export default function CaseMap() {
   useEffect(() => {
     loadData(categoryFilter);
   }, [categoryFilter, loadData]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      mapRef.current?.resize();
+    }, 280);
+
+    return () => window.clearTimeout(timer);
+  }, [isMobileSidebarOpen]);
 
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return;
@@ -295,7 +304,6 @@ export default function CaseMap() {
       `;
       el.title = item.description;
 
-      
 
       const popup = new maplibregl.Popup({
         offset: 18,
@@ -316,16 +324,116 @@ export default function CaseMap() {
   const latestCases = [...cases].slice(0, 10);
 
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        background: "#f4f4f4",
-        overflow: "hidden",
-      }}
-    >
+    <>
+      <style>{`
+        @media (max-width: 768px) {
+          .case-map-layout {
+            position: relative;
+          }
+
+          .case-map-sidebar {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 88vw !important;
+            min-width: 0 !important;
+            max-width: 380px !important;
+            height: 100dvh !important;
+            transform: translateX(-105%);
+            transition: transform 0.24s ease;
+            z-index: 80 !important;
+          }
+
+          .case-map-sidebar.open {
+            transform: translateX(0);
+          }
+
+          .case-map-main {
+            width: 100vw !important;
+            height: 100dvh !important;
+          }
+
+          .case-map-topbar {
+            display: none !important;
+          }
+
+          .case-map-main-area {
+            height: 100dvh !important;
+            flex: 1 !important;
+          }
+
+          .mobile-menu-button {
+            display: block !important;
+          }
+
+          .mobile-close-button {
+            display: inline-flex !important;
+          }
+
+          .mobile-overlay.open {
+            display: block !important;
+          }
+
+          .desktop-sidebar-spacer {
+            display: none !important;
+          }
+        }
+      `}</style>
+
+      <div
+        className="case-map-layout"
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          background: "#f4f4f4",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+      <button
+        type="button"
+        className="mobile-menu-button"
+        onClick={() => setIsMobileSidebarOpen(true)}
+        style={{
+          display: "none",
+          position: "absolute",
+          top: 12,
+          left: 12,
+          zIndex: 60,
+          border: "none",
+          borderRadius: 999,
+          padding: "10px 14px",
+          background: "#1a1a1a",
+          color: "#fff",
+          fontSize: 14,
+          fontWeight: 800,
+          boxShadow: "0 2px 10px rgba(0,0,0,0.28)",
+          cursor: "pointer",
+        }}
+      >
+        ☰ 情報
+      </button>
+
+      <button
+        type="button"
+        aria-label="サイドバーを閉じる"
+        className={`mobile-overlay ${isMobileSidebarOpen ? "open" : ""}`}
+        onClick={() => setIsMobileSidebarOpen(false)}
+        style={{
+          display: "none",
+          position: "fixed",
+          inset: 0,
+          zIndex: 70,
+          border: "none",
+          background: "rgba(0,0,0,0.32)",
+          padding: 0,
+          cursor: "pointer",
+        }}
+      />
+
       <aside
+        className={`case-map-sidebar ${isMobileSidebarOpen ? "open" : ""}`}
         style={{
           width: 340,
           minWidth: 300,
@@ -339,6 +447,29 @@ export default function CaseMap() {
         }}
       >
         <div style={{ padding: "18px 18px 24px" }}>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
+            <button
+              type="button"
+              className="mobile-close-button"
+              onClick={() => setIsMobileSidebarOpen(false)}
+              style={{
+                display: "none",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "none",
+                borderRadius: 999,
+                padding: "7px 12px",
+                background: "#eeeeee",
+                color: "#333",
+                fontSize: 13,
+                fontWeight: 800,
+                cursor: "pointer",
+              }}
+            >
+              閉じる
+            </button>
+          </div>
+
           <h1 style={{ fontSize: 20, margin: "0 0 4px", fontWeight: 800, color: "#1a1a1a" }}>
             不起訴事件マップ
           </h1>
@@ -349,6 +480,7 @@ export default function CaseMap() {
 
           <a
             href="/submit"
+            onClick={() => setIsMobileSidebarOpen(false)}
             style={{
               display: "block",
               textAlign: "center",
@@ -420,6 +552,7 @@ export default function CaseMap() {
                     <button
                       type="button"
                       onClick={() => {
+                        setIsMobileSidebarOpen(false);
                         mapRef.current?.flyTo({
                           center: [item.lng, item.lat],
                           zoom: 12,
@@ -460,8 +593,8 @@ export default function CaseMap() {
         </div>
       </aside>
 
-      <section style={{ flex: 1, height: "100vh", display: "flex", flexDirection: "column", minWidth: 0 }}>
-        <header style={topBarStyle}>
+      <section className="case-map-main" style={{ flex: 1, height: "100vh", display: "flex", flexDirection: "column", minWidth: 0 }}>
+        <header className="case-map-topbar" style={topBarStyle}>
           <div style={topAdStyle}>
             上部広告枠
             <br />
@@ -469,7 +602,7 @@ export default function CaseMap() {
           </div>
         </header>
 
-        <main style={{ flex: 1, position: "relative", minHeight: 0 }}>
+        <main className="case-map-main-area" style={{ flex: 1, position: "relative", minHeight: 0 }}>
           <div ref={mapContainerRef} style={{ width: "100%", height: "100%" }} />
 
           <div
@@ -490,6 +623,7 @@ export default function CaseMap() {
         </main>
       </section>
     </div>
+    </>
   );
 }
 
