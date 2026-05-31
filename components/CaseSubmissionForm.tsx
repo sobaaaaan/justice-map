@@ -512,17 +512,7 @@ export default function CaseSubmissionForm() {
 
   return (
     <div style={s.wrap}>
-      <h1
-        style={{
-          color: "red",
-          fontSize: 40,
-          background: "yellow",
-          padding: 10,
-          marginBottom: 20,
-        }}
-      >
-        ココが画面に表示されていればファイルは合っています！
-      </h1>
+
 
       {/* ヘッダー */}
       <div style={s.header}>
