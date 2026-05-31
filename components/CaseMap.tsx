@@ -295,12 +295,7 @@ export default function CaseMap() {
       `;
       el.title = item.description;
 
-      el.addEventListener("mouseenter", () => {
-        el.style.transform = "scale(1.25)";
-      });
-      el.addEventListener("mouseleave", () => {
-        el.style.transform = "scale(1)";
-      });
+      
 
       const popup = new maplibregl.Popup({
         offset: 18,
