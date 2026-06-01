@@ -604,6 +604,9 @@ export default function CaseMap() {
              <a href="/about" style={legalLinkStyle}>
               このサイトの目的
             </a>
+            <a href="/jijou" style={legalLinkStyle}>
+              不起訴に関する「大人の事情」
+            </a
           </section>
         </div>
       </aside>
