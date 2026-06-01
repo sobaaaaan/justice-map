@@ -234,6 +234,9 @@ export default function CaseMap() {
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
   const [cases, setCases] = useState<CasePoint[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
 
   const loadData = useCallback(async (filter: CategoryFilter) => {
     setLoading(true);
@@ -314,17 +317,125 @@ export default function CaseMap() {
 
   const latestCases = [...cases].slice(0, 10);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartXRef.current = touch.clientX;
+    touchStartYRef.current = touch.clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const startX = touchStartXRef.current;
+    const startY = touchStartYRef.current;
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+
+    if (startX == null || startY == null) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+
+    // スマホのみ：下パネル上で上スワイプ or 左→右スワイプしたら全画面寄りに展開
+    if (Math.abs(dx) > 70 && dx > 0) {
+      setMobilePanelOpen(true);
+      setTimeout(() => mapRef.current?.resize(), 260);
+      return;
+    }
+
+    if (Math.abs(dy) > 70) {
+      setMobilePanelOpen(dy < 0);
+      setTimeout(() => mapRef.current?.resize(), 260);
+    }
+  };
+
+  const toggleMobilePanel = () => {
+    setMobilePanelOpen((prev) => !prev);
+    setTimeout(() => mapRef.current?.resize(), 260);
+  };
+
   return (
     <div
+      className="case-map-layout"
       style={{
         width: "100vw",
         height: "100vh",
         display: "flex",
         background: "#f4f4f4",
         overflow: "hidden",
+        position: "relative",
       }}
     >
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .case-map-layout {
+            display: block !important;
+          }
+
+          .case-map-sidebar {
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            top: auto !important;
+            width: 100vw !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            height: 34vh !important;
+            border-right: none !important;
+            border-top: 1px solid #ddd !important;
+            border-radius: 18px 18px 0 0 !important;
+            box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.18) !important;
+            z-index: 60 !important;
+            transition: height 0.25s ease !important;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .case-map-sidebar.mobile-open {
+            height: 88vh !important;
+          }
+
+          .case-map-sidebar-inner {
+            padding: 10px 14px 24px !important;
+          }
+
+          .case-map-mobile-handle {
+            display: flex !important;
+          }
+
+          .case-map-main-section {
+            width: 100vw !important;
+            height: 100vh !important;
+            display: block !important;
+          }
+
+          .case-map-top-ad {
+            display: none !important;
+          }
+
+          .case-map-main {
+            height: 100vh !important;
+            min-height: 100vh !important;
+          }
+
+          .case-map-mobile-toggle {
+            display: block !important;
+          }
+
+          .case-map-mobile-note {
+            bottom: calc(34vh + 10px) !important;
+            right: 10px !important;
+            max-width: calc(100vw - 20px);
+          }
+
+          .case-map-sidebar.mobile-open ~ .case-map-main-section .case-map-mobile-note {
+            display: none !important;
+          }
+        }
+      `}</style>
       <aside
+        className={`case-map-sidebar ${mobilePanelOpen ? "mobile-open" : ""}`}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         style={{
           width: 340,
           minWidth: 300,
@@ -337,7 +448,39 @@ export default function CaseMap() {
           zIndex: 20,
         }}
       >
-        <div style={{ padding: "18px 18px 24px" }}>
+        <div className="case-map-sidebar-inner" style={{ padding: "18px 18px 24px" }}>
+          <button
+            type="button"
+            className="case-map-mobile-handle"
+            onClick={toggleMobilePanel}
+            aria-label={mobilePanelOpen ? "情報パネルを縮小" : "情報パネルを展開"}
+            style={{
+              display: "none",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              border: "none",
+              background: "transparent",
+              color: "#777",
+              fontSize: 12,
+              fontWeight: 700,
+              padding: "2px 0 10px",
+              cursor: "pointer",
+            }}
+          >
+            <span
+              style={{
+                width: 42,
+                height: 4,
+                borderRadius: 999,
+                background: "#ccc",
+                display: "inline-block",
+              }}
+            />
+            {mobilePanelOpen ? "下へ縮小" : "上へ展開"}
+          </button>
+
           <h1 style={{ fontSize: 20, margin: "0 0 4px", fontWeight: 800, color: "#1a1a1a" }}>
             不起訴事件マップ
           </h1>
@@ -456,48 +599,11 @@ export default function CaseMap() {
               現在は「1事件=1ピン」の試験表示です。住所から緯度経度を自動取得する処理を追加すると、投稿内容が自動で地図に反映されます。
             </p>
           </section>
-
-          <section style={cardStyle}>
-            <h2 style={sectionTitleStyle}>サイト情報</h2>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "8px",
-                fontSize: "13px",
-                lineHeight: "1.6",
-              }}
-            >
-
-            
-              <hr style={{ width: "100%", border: "none", borderTop: "1px solid #eee", margin: "4px 0" }} />
-
-              <a href="/contact">お問い合わせ</a>
-              <a href="/terms">利用規約</a>
-              <a href="/privacy">プライバシーポリシー</a>
-              <a href="/delete-request">削除依頼</a>
-              <a href="/appeal">異議申立て</a>
-              <a href="/Non-prosecution">不起訴とは何か</a>
-              <a href="/about">このサイトの目的</a>
-            </div>
-
-            <p
-              style={{
-                marginTop: "12px",
-                fontSize: "11px",
-                color: "#777",
-                lineHeight: 1.6,
-              }}
-            >
-              掲載内容に問題がある場合は、削除依頼または異議申立てフォームからご連絡ください。
-            </p>
-          </section>
         </div>
       </aside>
 
-      <section style={{ flex: 1, height: "100vh", display: "flex", flexDirection: "column", minWidth: 0 }}>
-        <header style={topBarStyle}>
+      <section className="case-map-main-section" style={{ flex: 1, height: "100vh", display: "flex", flexDirection: "column", minWidth: 0 }}>
+        <header className="case-map-top-ad" style={topBarStyle}>
           <div style={topAdStyle}>
             上部広告枠
             <br />
@@ -505,10 +611,35 @@ export default function CaseMap() {
           </div>
         </header>
 
-        <main style={{ flex: 1, position: "relative", minHeight: 0 }}>
+        <main className="case-map-main" style={{ flex: 1, position: "relative", minHeight: 0 }}>
+          <button
+            type="button"
+            className="case-map-mobile-toggle"
+            onClick={toggleMobilePanel}
+            style={{
+              display: "none",
+              position: "absolute",
+              left: 12,
+              top: 12,
+              zIndex: 70,
+              border: "none",
+              borderRadius: 999,
+              padding: "9px 13px",
+              background: "#1a1a1a",
+              color: "#fff",
+              fontSize: 13,
+              fontWeight: 700,
+              boxShadow: "0 2px 10px rgba(0,0,0,0.25)",
+              cursor: "pointer",
+            }}
+          >
+            {mobilePanelOpen ? "地図を広く" : "☰ 情報"}
+          </button>
+
           <div ref={mapContainerRef} style={{ width: "100%", height: "100%" }} />
 
           <div
+            className="case-map-mobile-note"
             style={{
               position: "absolute",
               bottom: 12,
