@@ -294,8 +294,7 @@ export default function CaseMap() {
         transition: transform 0.15s ease;
       `;
       el.title = item.description;
-  報道・公開情報をもとに、不起訴処分等の事件情報を地図上で可視化します。
-</p>
+
 
       const popup = new maplibregl.Popup({
         offset: 18,
@@ -343,32 +342,9 @@ export default function CaseMap() {
             不起訴事件マップ
           </h1>
 
-          <section
-            style={{
-              margin: "0 0 14px",
-              padding: "12px 12px",
-              borderRadius: 12,
-              background: "#f7f8fa",
-              border: "1px solid #eceff3",
-            }}
-          >
-            <h2
-              style={{
-                margin: "0 0 6px",
-                fontSize: 13,
-                fontWeight: 800,
-                color: "#222",
-              }}
-            >
-              不起訴事件マップとは
-            </h2>
-            <p style={{ margin: 0, color: "#666", fontSize: 12, lineHeight: 1.7 }}>
-              本サイトは、報道機関等により公開された不起訴事件・不起訴処分等に関する情報を、
-              地図上で整理して確認できるようにすることを目的としています。掲載情報は公開情報をもとに整理し、
-              不起訴が有罪または無罪を意味するものではないことを前提に、事件情報の可視化と記録を行います。
-              投稿された情報は、管理者による確認・承認後に掲載されます。
-            </p>
-          </section>
+          <p style={{ margin: "0 0 14px", color: "#666", fontSize: 12, lineHeight: 1.6 }}>
+            報道・公開情報をもとに、不起訴処分等の事件情報を地図上で可視化します。
+          </p>
 
           <a
             href="/submit"
@@ -397,7 +373,7 @@ export default function CaseMap() {
               <span style={{ fontSize: 13, color: "#777", marginLeft: 4 }}>件</span>
             </div>
           </section>
-  <section style={cardStyle}> <h2 style={sectionTitleStyle}>サイト情報</h2> <div style={{ display: "flex", flexDirection: "column", gap: "8px", fontSize: "13px", lineHeight: "1.6", }} > <a href="/about">サイトの目的</a> <a href="/nonprosecution">不起訴とは何か</a> <a href="/posting-policy">掲載基準</a> <a href="/deletion-policy">削除基準</a> <hr /> <a href="/contact">お問い合わせ</a> <a href="/terms">利用規約</a> <a href="/privacy">プライバシーポリシー</a> <a href="/delete-request">削除依頼</a> <a href="/appeal">異議申立て</a> </div> </section>
+
           <section style={cardStyle}>
             <h2 style={sectionTitleStyle}>絞り込み</h2>
 
@@ -483,47 +459,40 @@ export default function CaseMap() {
 
           <section style={cardStyle}>
             <h2 style={sectionTitleStyle}>サイト情報</h2>
-            <nav
-              aria-label="サイト情報"
+
+            <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: 8,
-                fontSize: 13,
+                gap: "8px",
+                fontSize: "13px",
+                lineHeight: "1.6",
+              }}
+            >
+              <a href="/about">サイトの目的</a>
+              <a href="/nonprosecution">不起訴とは何か</a>
+              <a href="/posting-policy">掲載基準</a>
+              <a href="/deletion-policy">削除基準</a>
+
+              <hr style={{ width: "100%", border: "none", borderTop: "1px solid #eee", margin: "4px 0" }} />
+
+              <a href="/contact">お問い合わせ</a>
+              <a href="/terms">利用規約</a>
+              <a href="/privacy">プライバシーポリシー</a>
+              <a href="/delete-request">削除依頼</a>
+              <a href="/appeal">異議申立て</a>
+            </div>
+
+            <p
+              style={{
+                marginTop: "12px",
+                fontSize: "11px",
+                color: "#777",
                 lineHeight: 1.6,
               }}
             >
-              <a href="/about" style={sidebarLinkStyle}>
-                サイトの目的
-              </a>
-              <a href="/nonprosecution" style={sidebarLinkStyle}>
-                不起訴とは何か
-              </a>
-              <a href="/posting-policy" style={sidebarLinkStyle}>
-                掲載基準
-              </a>
-              <a href="/deletion-policy" style={sidebarLinkStyle}>
-                削除基準
-              </a>
-
-              <div style={{ height: 1, background: "#eee", margin: "4px 0" }} />
-
-              <a href="/contact" style={sidebarLinkStyle}>
-                お問い合わせ
-              </a>
-              <a href="/terms" style={sidebarLinkStyle}>
-                利用規約
-              </a>
-              <a href="/privacy" style={sidebarLinkStyle}>
-                プライバシーポリシー
-              </a>
-              <a href="/delete-request" style={sidebarLinkStyle}>
-                削除依頼
-              </a>
-              <a href="/appeal" style={sidebarLinkStyle}>
-                異議申立て
-              </a>
-            </nav>
+              掲載内容に問題がある場合は、削除依頼または異議申立てフォームからご連絡ください。
+            </p>
           </section>
         </div>
       </aside>
@@ -560,66 +529,7 @@ export default function CaseMap() {
     </div>
   );
 }
-<section style={cardStyle}>
-  <h2 style={sectionTitleStyle}>サイト情報</h2>
 
-  <div
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      gap: "8px",
-      fontSize: "13px",
-      lineHeight: "1.6",
-    }}
-  >
-    <a href="/about">サイトの目的</a>
-
-    <a href="/nonprosecution">
-      不起訴とは何か
-    </a>
-
-    <a href="/posting-policy">
-      掲載基準
-    </a>
-
-    <a href="/deletion-policy">
-      削除基準
-    </a>
-
-    <a href="/contact">
-      お問い合わせ
-    </a>
-
-    <a href="/terms">
-      利用規約
-    </a>
-
-    <a href="/privacy">
-      プライバシーポリシー
-    </a>
-
-    <a href="/delete-request">
-      削除依頼
-    </a>
-
-    <a href="/appeal">
-      異議申立て
-    </a>
-  </div>
-
-  <p
-    style={{
-      marginTop: "12px",
-      fontSize: "11px",
-      color: "#777",
-      lineHeight: "1.6",
-    }}
-  >
-    掲載内容に問題がある場合は、
-    削除依頼または異議申立てフォームから
-    ご連絡ください。
-  </p>
-</section>
 const cardStyle: React.CSSProperties = {
   border: "1px solid #e7e7e7",
   borderRadius: 12,
@@ -657,12 +567,6 @@ const emptyTextStyle: React.CSSProperties = {
   fontSize: 12,
   color: "#999",
   margin: 0,
-};
-
-const sidebarLinkStyle: React.CSSProperties = {
-  color: "#1565c0",
-  textDecoration: "none",
-  fontWeight: 700,
 };
 
 const sideAdStyle: React.CSSProperties = {
