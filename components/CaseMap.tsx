@@ -470,9 +470,7 @@ export default function CaseMap() {
               }}
             >
 
-              <a href="/posting-policy">掲載基準</a>
-              <a href="/deletion-policy">削除基準</a>
-
+            
               <hr style={{ width: "100%", border: "none", borderTop: "1px solid #eee", margin: "4px 0" }} />
 
               <a href="/contact">お問い合わせ</a>
