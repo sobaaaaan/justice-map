@@ -560,7 +560,66 @@ export default function CaseMap() {
     </div>
   );
 }
+<section style={cardStyle}>
+  <h2 style={sectionTitleStyle}>サイト情報</h2>
 
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "8px",
+      fontSize: "13px",
+      lineHeight: "1.6",
+    }}
+  >
+    <a href="/about">サイトの目的</a>
+
+    <a href="/nonprosecution">
+      不起訴とは何か
+    </a>
+
+    <a href="/posting-policy">
+      掲載基準
+    </a>
+
+    <a href="/deletion-policy">
+      削除基準
+    </a>
+
+    <a href="/contact">
+      お問い合わせ
+    </a>
+
+    <a href="/terms">
+      利用規約
+    </a>
+
+    <a href="/privacy">
+      プライバシーポリシー
+    </a>
+
+    <a href="/delete-request">
+      削除依頼
+    </a>
+
+    <a href="/appeal">
+      異議申立て
+    </a>
+  </div>
+
+  <p
+    style={{
+      marginTop: "12px",
+      fontSize: "11px",
+      color: "#777",
+      lineHeight: "1.6",
+    }}
+  >
+    掲載内容に問題がある場合は、
+    削除依頼または異議申立てフォームから
+    ご連絡ください。
+  </p>
+</section>
 const cardStyle: React.CSSProperties = {
   border: "1px solid #e7e7e7",
   borderRadius: 12,
