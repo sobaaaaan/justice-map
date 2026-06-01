@@ -70,7 +70,7 @@ export default function DeleteRequestPage() {
         </p>
 
         <form
-          action="mailto:your-email@example.com"
+          action="mailto:okusanpan@yahoo.co.jp"
           method="post"
           encType="text/plain"
           style={formStyle}
