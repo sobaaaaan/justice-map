@@ -70,7 +70,7 @@ export default function AppealPage() {
         </p>
 
         <form
-          action="mailto:okusanpan@yahoo.co.jp""
+          action="mailto:okusanpan@yahoo.co.jp"
           method="post"
           encType="text/plain"
           style={formStyle}
