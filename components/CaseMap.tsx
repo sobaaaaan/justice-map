@@ -582,6 +582,7 @@ export default function CaseMap() {
 
           <section style={legalLinksStyle}>
             <h2 style={legalLinksTitleStyle}>サイト運営方針</h2>
+          
             <a href="/policy" style={legalLinkStyle}>
               投稿ポリシー
             </a>
@@ -594,6 +595,15 @@ export default function CaseMap() {
             <p style={{ fontSize: 11, color: "#999", lineHeight: 1.6, margin: "10px 0 0" }}>
               掲載内容に問題がある場合は、削除依頼または異議申立てフォームからご連絡ください。
             </p>
+              <a href="/contact" style={legalLinkStyle}>
+              コンタクト
+            </a>
+              <a href="/Non-prosecution" style={legalLinkStyle}>
+              不起訴について
+            </a>
+             <a href="/about" style={legalLinkStyle}>
+              このサイトを作った理由
+            </a>
           </section>
         </div>
       </aside>
