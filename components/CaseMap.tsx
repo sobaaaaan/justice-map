@@ -596,7 +596,7 @@ export default function CaseMap() {
               掲載内容に問題がある場合は、削除依頼または異議申立てフォームからご連絡ください。
             </p>
               <a href="/contact" style={legalLinkStyle}>
-              コンタクト
+              お問い合わせ全般
             </a>
               <a href="/Non-prosecution" style={legalLinkStyle}>
               不起訴について
