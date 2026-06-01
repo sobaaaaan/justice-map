@@ -321,7 +321,7 @@ export default function CaseMap() {
     return () => window.clearTimeout(timer);
   }, [isMobileSidebarOpen]);
 
-  const latestCases = [...cases].slice(0, 10);
+  const latestCases = [...cases].slice(0, 5);
 
   return (
     <div
