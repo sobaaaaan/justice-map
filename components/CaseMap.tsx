@@ -294,7 +294,8 @@ export default function CaseMap() {
         transition: transform 0.15s ease;
       `;
       el.title = item.description;
-
+  報道・公開情報をもとに、不起訴処分等の事件情報を地図上で可視化します。
+</p>
 
       const popup = new maplibregl.Popup({
         offset: 18,
