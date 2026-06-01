@@ -481,6 +481,8 @@ export default function CaseMap() {
               <a href="/privacy">プライバシーポリシー</a>
               <a href="/delete-request">削除依頼</a>
               <a href="/appeal">異議申立て</a>
+              <a href="/Non-prosecution">不起訴とは何か</a>
+              <a href="/about">このサイトの目的</a>
             </div>
 
             <p
