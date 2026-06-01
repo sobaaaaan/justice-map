@@ -234,6 +234,7 @@ export default function CaseMap() {
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
   const [cases, setCases] = useState<CasePoint[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const loadData = useCallback(async (filter: CategoryFilter) => {
     setLoading(true);
@@ -312,19 +313,120 @@ export default function CaseMap() {
     });
   }, [cases, loading]);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      mapRef.current?.resize();
+    }, 260);
+
+    return () => window.clearTimeout(timer);
+  }, [isMobileSidebarOpen]);
+
   const latestCases = [...cases].slice(0, 10);
 
   return (
     <div
+      className="case-map-layout"
       style={{
         width: "100vw",
         height: "100vh",
         display: "flex",
         background: "#f4f4f4",
         overflow: "hidden",
+        position: "relative",
       }}
     >
+      <style>{`
+        .mobile-menu-button,
+        .mobile-sidebar-close,
+        .mobile-sidebar-overlay {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .case-map-layout {
+            display: block !important;
+          }
+
+          .case-map-sidebar {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: min(88vw, 360px) !important;
+            min-width: 0 !important;
+            max-width: min(88vw, 360px) !important;
+            height: 100dvh !important;
+            z-index: 1000 !important;
+            transform: translateX(-104%);
+            transition: transform 0.24s ease;
+            border-right: 1px solid #ddd;
+          }
+
+          .case-map-sidebar.open {
+            transform: translateX(0);
+          }
+
+          .case-map-main {
+            width: 100vw !important;
+            height: 100dvh !important;
+            min-width: 0 !important;
+          }
+
+          .case-map-topbar {
+            display: none !important;
+          }
+
+          .mobile-menu-button {
+            display: block !important;
+          }
+
+          .mobile-sidebar-close {
+            display: block !important;
+          }
+
+          .mobile-sidebar-overlay.open {
+            display: block !important;
+          }
+        }
+      `}</style>
+      <button
+        type="button"
+        className="mobile-menu-button"
+        onClick={() => setIsMobileSidebarOpen(true)}
+        style={{
+          position: "absolute",
+          top: 12,
+          left: 12,
+          zIndex: 900,
+          border: "none",
+          borderRadius: 999,
+          padding: "10px 14px",
+          background: "#1a1a1a",
+          color: "#fff",
+          fontSize: 14,
+          fontWeight: 700,
+          boxShadow: "0 2px 10px rgba(0,0,0,0.25)",
+          cursor: "pointer",
+        }}
+      >
+        ☰ 情報
+      </button>
+      <button
+        type="button"
+        aria-label="左カラムを閉じる"
+        className={`mobile-sidebar-overlay ${isMobileSidebarOpen ? "open" : ""}`}
+        onClick={() => setIsMobileSidebarOpen(false)}
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 999,
+          border: "none",
+          background: "rgba(0,0,0,0.28)",
+          padding: 0,
+          cursor: "pointer",
+        }}
+      />
       <aside
+        className={`case-map-sidebar ${isMobileSidebarOpen ? "open" : ""}`}
         style={{
           width: 340,
           minWidth: 300,
@@ -338,6 +440,25 @@ export default function CaseMap() {
         }}
       >
         <div style={{ padding: "18px 18px 24px" }}>
+          <button
+            type="button"
+            className="mobile-sidebar-close"
+            onClick={() => setIsMobileSidebarOpen(false)}
+            style={{
+              marginLeft: "auto",
+              marginBottom: 12,
+              border: "none",
+              borderRadius: 999,
+              padding: "7px 12px",
+              background: "#eeeeee",
+              color: "#222",
+              fontSize: 13,
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            閉じる
+          </button>
           <h1 style={{ fontSize: 20, margin: "0 0 4px", fontWeight: 800, color: "#1a1a1a" }}>
             不起訴事件マップ
           </h1>
@@ -419,6 +540,7 @@ export default function CaseMap() {
                     <button
                       type="button"
                       onClick={() => {
+                        setIsMobileSidebarOpen(false);
                         mapRef.current?.flyTo({
                           center: [item.lng, item.lat],
                           zoom: 12,
@@ -476,8 +598,8 @@ export default function CaseMap() {
         </div>
       </aside>
 
-      <section style={{ flex: 1, height: "100vh", display: "flex", flexDirection: "column", minWidth: 0 }}>
-        <header style={topBarStyle}>
+      <section className="case-map-main" style={{ flex: 1, height: "100vh", display: "flex", flexDirection: "column", minWidth: 0 }}>
+        <header className="case-map-topbar" style={topBarStyle}>
           <div style={topAdStyle}>
             上部広告枠
             <br />
