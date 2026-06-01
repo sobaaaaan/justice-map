@@ -469,8 +469,7 @@ export default function CaseMap() {
                 lineHeight: "1.6",
               }}
             >
-              <a href="/about">サイトの目的</a>
-              <a href="/nonprosecution">不起訴とは何か</a>
+
               <a href="/posting-policy">掲載基準</a>
               <a href="/deletion-policy">削除基準</a>
 
