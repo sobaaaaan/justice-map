@@ -602,7 +602,7 @@ export default function CaseMap() {
               不起訴について
             </a>
              <a href="/about" style={legalLinkStyle}>
-              このサイトを作った理由
+              このサイトの目的
             </a>
           </section>
         </div>
