@@ -114,9 +114,7 @@ export default function Page() {
     </main>
   );
 }export const metadata = {
-  title: "運営者情報 | 不起訴事件マップ",
-  description:
-    "不起訴事件マップの運営者情報、お問い合わせ窓口、削除依頼窓口について掲載しています。",
+
 };
 
 const containerStyle: React.CSSProperties = {
