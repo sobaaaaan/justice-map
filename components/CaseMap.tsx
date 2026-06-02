@@ -605,7 +605,7 @@ export default function CaseMap() {
               このサイトの目的
             </a>
             <a href="/jijou" style={legalLinkStyle}>
-              不起訴について その2
+              不起訴についてその2
             </a>
             <a href="/operator" style={legalLinkStyle}>
               サイト運営者情報
