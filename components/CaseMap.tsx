@@ -598,6 +598,9 @@ export default function CaseMap() {
               <a href="/contact" style={legalLinkStyle}>
               お問い合わせ全般
             </a>
+            <a href="/operator" style={legalLinkStyle}>
+              サイト運営者情報
+            </a>
               <a href="/Non-prosecution" style={legalLinkStyle}>
               不起訴について
             </a>
@@ -610,9 +613,7 @@ export default function CaseMap() {
               <a href="/kensatsu-shinsakai" style={legalLinkStyle}>
               検察審査会とは
             </a>
-            <a href="/operator" style={legalLinkStyle}>
-              サイト運営者情報
-            </a>
+            
           </section>
         </div>
       </aside>
