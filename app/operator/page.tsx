@@ -1,9 +1,65 @@
+import React from "react";
+
+// 1. スタイル定義を一番上に移動（Turbopackの解析エラーを防止）
+const containerStyle: React.CSSProperties = {
+  maxWidth: "860px",
+  margin: "0 auto",
+  padding: "32px 20px",
+  lineHeight: 1.9,
+  color: "#1f2937",
+};
+
+const h1Style: React.CSSProperties = {
+  fontSize: "2rem",
+  marginBottom: "20px",
+  color: "#111827",
+};
+
+const h2Style: React.CSSProperties = {
+  fontSize: "1.35rem",
+  marginTop: "36px",
+  marginBottom: "12px",
+  borderLeft: "5px solid #2563eb",
+  paddingLeft: "12px",
+  color: "#111827",
+};
+
+const tableStyle: React.CSSProperties = {
+  width: "100%",
+  borderCollapse: "collapse",
+  marginTop: "20px",
+};
+
+const thStyle: React.CSSProperties = {
+  width: "28%",
+  textAlign: "left",
+  background: "#f9fafb",
+  border: "1px solid #e5e7eb",
+  padding: "12px",
+  verticalAlign: "top",
+};
+
+const tdStyle: React.CSSProperties = {
+  border: "1px solid #e5e7eb",
+  padding: "12px",
+};
+
+const noteStyle: React.CSSProperties = {
+  background: "#f9fafb",
+  border: "1px solid #e5e7eb",
+  borderRadius: "10px",
+  padding: "18px",
+  marginTop: "24px",
+};
+
+// 2. メタデータを定義
 export const metadata = {
   title: "運営者情報 | 不起訴事件マップ",
   description:
     "不起訴事件マップの運営者情報、お問い合わせ窓口、削除依頼窓口について掲載しています。",
 };
 
+// 3. コンポーネントを配置
 export default function Page() {
   return (
     <main style={containerStyle}>
@@ -63,54 +119,3 @@ export default function Page() {
     </main>
   );
 }
-
-const containerStyle: React.CSSProperties = {
-  maxWidth: "860px",
-  margin: "0 auto",
-  padding: "32px 20px",
-  lineHeight: 1.9,
-  color: "#1f2937",
-};
-
-const h1Style: React.CSSProperties = {
-  fontSize: "2rem",
-  marginBottom: "20px",
-  color: "#111827",
-};
-
-const h2Style: React.CSSProperties = {
-  fontSize: "1.35rem",
-  marginTop: "36px",
-  marginBottom: "12px",
-  borderLeft: "5px solid #2563eb",
-  paddingLeft: "12px",
-  color: "#111827",
-};
-
-const tableStyle: React.CSSProperties = {
-  width: "100%",
-  borderCollapse: "collapse",
-  marginTop: "20px",
-};
-
-const thStyle: React.CSSProperties = {
-  width: "28%",
-  textAlign: "left",
-  background: "#f9fafb",
-  border: "1px solid #e5e7eb",
-  padding: "12px",
-  verticalAlign: "top",
-};
-
-const tdStyle: React.CSSProperties = {
-  border: "1px solid #e5e7eb",
-  padding: "12px",
-};
-
-const noteStyle: React.CSSProperties = {
-  background: "#f9fafb",
-  border: "1px solid #e5e7eb",
-  borderRadius: "10px",
-  padding: "18px",
-  marginTop: "24px",
-};
