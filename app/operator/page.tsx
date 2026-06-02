@@ -112,4 +112,3 @@ export default function Page() {
         刑事司法制度や公開情報への理解を深めるための情報提供を目的としています。
       </div>
     </main>
-
