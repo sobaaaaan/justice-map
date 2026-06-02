@@ -605,7 +605,7 @@ export default function CaseMap() {
               このサイトの目的
             </a>
             <a href="/jijou" style={legalLinkStyle}>
-              不起訴についてその2
+              不起訴の事情
             </a>
               <a href="/kensatsu-shinsakai" style={legalLinkStyle}>
               検察審査会とは
