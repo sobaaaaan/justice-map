@@ -148,7 +148,7 @@ const tableStyle: React.CSSProperties = {
   marginTop: "20px",
 };
 
-const thStyle: React.CSSProperties = {
+
   width: "28%",
   textAlign: "left",
   background: "#f9fafb",
