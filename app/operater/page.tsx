@@ -42,7 +42,7 @@ const thStyle: React.CSSProperties = {
   verticalAlign: "top",
 };
 
-const tdStyle: React.CSSProperties = {
+
   border: "1px solid #e5e7eb",
   padding: "12px",
 };
