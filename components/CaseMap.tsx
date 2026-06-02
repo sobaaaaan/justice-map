@@ -606,7 +606,10 @@ export default function CaseMap() {
             </a>
             <a href="/jijou" style={legalLinkStyle}>
               不起訴について その2
-            </a
+            </a>
+            <a href="/operator" style={legalLinkStyle}>
+              サイト運営者情報
+            </a>
           </section>
         </div>
       </aside>
