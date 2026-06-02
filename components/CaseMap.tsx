@@ -607,6 +607,9 @@ export default function CaseMap() {
             <a href="/jijou" style={legalLinkStyle}>
               不起訴についてその2
             </a>
+              <a href="/kensatsu-shinsakai" style={legalLinkStyle}>
+              検察審査会とは
+            </a>
             <a href="/operator" style={legalLinkStyle}>
               サイト運営者情報
             </a>
