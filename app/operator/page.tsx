@@ -1,6 +1,9 @@
-import React from "react";
+export const metadata = {
+  title: "運営者情報 | 不起訴事件マップ",
+  description:
+    "不起訴事件マップの運営者情報、お問い合わせ窓口、削除依頼窓口について掲載しています。",
+};
 
-// 1. スタイル定義を一番上に移動（Turbopackの解析エラーを防止）
 const containerStyle: React.CSSProperties = {
   maxWidth: "860px",
   margin: "0 auto",
@@ -52,14 +55,6 @@ const noteStyle: React.CSSProperties = {
   marginTop: "24px",
 };
 
-// 2. メタデータを定義
-export const metadata = {
-  title: "運営者情報 | 不起訴事件マップ",
-  description:
-    "不起訴事件マップの運営者情報、お問い合わせ窓口、削除依頼窓口について掲載しています。",
-};
-
-// 3. コンポーネントを配置
 export default function Page() {
   return (
     <main style={containerStyle}>
@@ -113,5 +108,9 @@ export default function Page() {
 
       <div style={noteStyle}>
         <strong>ご注意：</strong>
-      
-// test
+        不起訴は有罪判決ではありません。本サイトは、特定の人物を断罪・非難することを目的としたものではなく、
+        刑事司法制度や公開情報への理解を深めるための情報提供を目的としています。
+      </div>
+    </main>
+  );
+}
