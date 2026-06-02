@@ -582,7 +582,9 @@ export default function CaseMap() {
 
           <section style={legalLinksStyle}>
             <h2 style={legalLinksTitleStyle}>サイト運営方針</h2>
-          
+             <a href="/operator" style={legalLinkStyle}>
+              サイト運営者情報
+            </a>
             <a href="/policy" style={legalLinkStyle}>
               投稿ポリシー
             </a>
@@ -598,9 +600,7 @@ export default function CaseMap() {
               <a href="/contact" style={legalLinkStyle}>
               お問い合わせ全般
             </a>
-            <a href="/operator" style={legalLinkStyle}>
-              サイト運営者情報
-            </a>
+           
               <a href="/Non-prosecution" style={legalLinkStyle}>
               不起訴について
             </a>
