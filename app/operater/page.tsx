@@ -73,7 +73,7 @@ export default function Page() {
           </tr>
           <tr>
             <th style={thStyle}>運営者</th>
-            <td style={tdStyle}>すくぷら工房</td>
+            <td style={tdStyle}>すくぷら工房　</td>
           </tr>
           <tr>
             <th style={thStyle}>所在地</th>
