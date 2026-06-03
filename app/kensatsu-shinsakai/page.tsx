@@ -1,4 +1,4 @@
-```tsx
+
 export const metadata = {
   title: "検察審査会とは | 不起訴事件マップ",
   description:
