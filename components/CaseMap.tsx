@@ -588,6 +588,9 @@ export default function CaseMap() {
             <a href="/policy" style={legalLinkStyle}>
               投稿ポリシー
             </a>
+            <a href="/privacy" style={legalLinkStyle}>
+              プライバシーポリシー
+            </a>
             <a href="/delete-request" style={legalLinkStyle}>
               削除依頼フォーム
             </a>
