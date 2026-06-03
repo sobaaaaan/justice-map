@@ -126,6 +126,7 @@ async function fetchCasePoints(categoryFilter: CategoryFilter): Promise<CasePoin
     .select(
       "id, latitude, longitude, occurred_year, occurred_month, crime_category, status, description, source_url, submitter_comment"
     )
+    .eq("approval_status", "approved")
     .not("latitude", "is", null)
     .not("longitude", "is", null)
     .order("id", { ascending: false });
