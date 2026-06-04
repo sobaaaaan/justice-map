@@ -1,6 +1,6 @@
 // ============================================================
 // components/CaseMap.tsx
-// 左カラム + 上部広告カラム + 地図メイン
+// 左カラム + 上部カラム + 地図メイン
 // 「cases」テーブルの latitude / longitude を直接読んで、1事件=1ピンで表示する版
 // ============================================================
 
@@ -519,9 +519,9 @@ export default function CaseMap() {
           </section>
 
           <section style={sideAdStyle}>
-            左カラム広告枠
+            左カラム自由枠
             <br />
-            <span style={{ fontSize: 11 }}>縦長広告・自社広告・note導線など</span>
+            <span style={{ fontSize: 11 }}>自由枠</span>
           </section>
 
           <section style={cardStyle}>
@@ -623,9 +623,9 @@ export default function CaseMap() {
       <section className="case-map-main" style={{ flex: 1, height: "100vh", display: "flex", flexDirection: "column", minWidth: 0 }}>
         <header className="case-map-topbar" style={topBarStyle}>
           <div style={topAdStyle}>
-            上部広告枠
+            上部自由枠
             <br />
-            728×90 / 970×90 などの横長広告を想定
+            728×90 / 970×90 などの横長自由枠
           </div>
         </header>
 
