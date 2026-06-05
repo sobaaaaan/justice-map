@@ -141,8 +141,11 @@ export default function CaseSubmissionForm() {
           .order("id", { ascending: true });
 
         if (error) throw error;
-        if (data) setPrefectures(data);
-      } catch (err) {
+        if (data) {
+  console.log("都道府県取得成功", data.length);
+  console.log(data);
+  setPrefectures(data);
+} catch (err) {
         console.error("都道府県データの取得に失敗しました:", err);
         setErrorMessage("都道府県マスターの読み込みに失敗しました。ページを再読み込みしてください。");
         setSubmitStatus("error");
