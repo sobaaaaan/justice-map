@@ -140,8 +140,15 @@ export default function CaseSubmissionForm() {
           .select("id, name")
           .order("id", { ascending: true });
 
-        if (error) throw error;
-        if (data) {
+       if (error) {
+  console.error("都道府県取得エラー:", error);
+  throw error;
+}
+
+console.log("都道府県取得結果:", data);
+console.log("都道府県件数:", data?.length);
+
+setPrefectures(data ?? []);
   console.log("都道府県取得成功", data.length);
   console.log(data);
   setPrefectures(data);
